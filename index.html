@@ -4,7 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Fraccional — Presentación</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --secondary: #10b981;
+            --accent: #8b5cf6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray-50: #f1f5f9;
+            --gray-100: #e2e8f0;
+            --gray-200: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-glow: 0 0 20px -5px var(--primary);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,32 +43,140 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--gray-50) 0%, #e0f2fe 50%, var(--gray-50) 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
-            color: #2c3e50;
+            color: var(--gray-800);
             overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .presentation-container {
             width: 100vw;
             height: 100vh;
             position: relative;
+            z-index: 1;
         }
 
+        /* ===== ANIMATIONS ===== */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(14, 165, 233, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.6); }
+        }
+
+        @keyframes gradient-underline {
+            from { width: 0; left: 50%; }
+            to { width: 100%; left: 0; }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-fadeInScale {
+            animation: fadeInScale 0.6s ease forwards;
+        }
+
+        .animate-slideInRight {
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; opacity: 0; }
+        .stagger-2 { animation-delay: 0.2s; opacity: 0; }
+        .stagger-3 { animation-delay: 0.3s; opacity: 0; }
+        .stagger-4 { animation-delay: 0.4s; opacity: 0; }
+        .stagger-5 { animation-delay: 0.5s; opacity: 0; }
+        .stagger-6 { animation-delay: 0.6s; opacity: 0; }
+
+        /* ===== SLIDES ===== */
         .slide {
             position: absolute;
             width: 100%;
             height: 100%;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s ease;
-            padding: 30px 50px;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 30px 50px 80px 50px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transform: translateX(60px);
+            transform: translateX(80px);
+        }
+
+        .slide.prev {
+            transform: translateX(-80px);
         }
 
         .slide.active {
@@ -46,240 +185,318 @@
             transform: translateX(0);
         }
 
-        .slide.prev {
-            transform: translateX(-60px);
-        }
-
+        /* ===== SLIDE HEADER ===== */
         .slide-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            position: relative;
         }
 
         .slide-header h1 {
-            font-size: 2.4rem;
-            color: #1a5f7a;
-            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.6rem;
             font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .slide-header h2 {
+            font-family: 'Inter', sans-serif;
             font-size: 1.3rem;
-            color: #5a7d8a;
+            color: var(--gray-600);
             font-weight: 400;
+            margin-bottom: 10px;
         }
 
         .slide-header .subtitle {
-            font-size: 1rem;
-            color: #3498db;
-            margin-top: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            color: var(--primary);
+            margin-top: 8px;
             font-weight: 500;
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(14, 165, 233, 0.2);
         }
 
-        /* Info cards for team/academic info */
-        .info-card {
-            background: #fff;
-            border-radius: 15px;
-            padding: 20px 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            margin: 10px;
+        /* Title underline decoration */
+        .slide-header h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-full);
+            margin: 12px auto 0;
+            transition: width 0.3s ease;
+        }
+
+        .slide.active .slide-header h1::after {
+            width: 120px;
+            animation: gradient-underline 0.8s ease forwards;
+        }
+
+        /* ===== ACADEMIC BANNER ===== */
+        .academic-banner {
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+            color: #fff;
+            padding: 18px 45px;
+            border-radius: var(--radius-xl);
+            margin: 20px auto 25px;
             text-align: center;
-            border: 1px solid rgba(52, 152, 219, 0.1);
+            max-width: 650px;
+            box-shadow: var(--shadow-lg), 0 0 30px rgba(14, 165, 233, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInScale 0.6s ease forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
         }
 
-        .info-card h3 {
-            color: #1a5f7a;
-            font-size: 1rem;
-            margin-bottom: 8px;
+        .academic-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        .academic-banner h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
             font-weight: 600;
+            position: relative;
         }
 
-        .info-card p {
-            color: #5a7d8a;
-            font-size: 0.9rem;
+        .academic-banner p {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
         }
 
+        /* ===== TEAM ===== */
         .team-grid {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 24px;
             flex-wrap: wrap;
-            margin: 20px 0;
+            margin: 25px 0;
         }
 
         .team-member {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-2xl);
+            padding: 25px 30px;
+            box-shadow: var(--shadow-md);
             text-align: center;
-            min-width: 200px;
-            border: 1px solid rgba(52, 152, 219, 0.1);
-            transition: transform 0.3s;
+            min-width: 180px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
         }
 
         .team-member:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(14, 165, 233, 0.15);
         }
 
         .team-member .avatar {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #3498db, #2ecc71);
-            border-radius: 50%;
-            margin: 0 auto 12px;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-full);
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #fff;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .avatar {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.5);
         }
 
         .team-member .name {
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--gray-800);
             font-size: 1rem;
             margin-bottom: 4px;
+            font-family: 'Poppins', sans-serif;
         }
 
         .team-member .role {
-            color: #7f8c8d;
+            color: var(--gray-400);
             font-size: 0.85rem;
+            font-weight: 500;
         }
 
-        /* Academic info banner */
-        .academic-banner {
-            background: linear-gradient(90deg, #1a5f7a, #3498db);
-            color: #fff;
-            padding: 15px 40px;
-            border-radius: 10px;
-            margin: 20px auto;
-            text-align: center;
-            max-width: 700px;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .academic-banner h3 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .academic-banner p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        /* Cost Tables */
+        /* ===== COST TABLES ===== */
         .cost-table {
             width: 95%;
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             border-collapse: separate;
             border-spacing: 0;
-            background: #fff;
-            border-radius: 12px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-xl);
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .cost-table:hover {
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(14, 165, 233, 0.1);
         }
 
         .cost-table thead {
-            background: linear-gradient(90deg, #1a5f7a, #3498db);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
         }
 
         .cost-table th {
-            padding: 14px 16px;
+            padding: 16px 18px;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
         }
 
         .cost-table td {
-            padding: 12px 16px;
-            border-bottom: 1px solid #ecf0f1;
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
             font-size: 0.9rem;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
             text-align: center;
-            color: #2c3e50;
+            color: var(--gray-800);
+        }
+
+        .cost-table tbody tr:hover td {
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .cost-table tbody tr {
+            transition: all 0.2s ease;
         }
 
         .cost-table tbody tr:hover {
-            background: #f8f9fa;
+            transform: scale(1.01);
         }
 
         .cost-table td:first-child {
             text-align: left;
             font-weight: 600;
-            color: #1a5f7a;
+            color: var(--gray-800);
         }
 
         .cost-table td:last-child {
             text-align: center;
             font-weight: 700;
-            color: #27ae60;
+            color: var(--secondary);
+            font-size: 0.95rem;
         }
 
         .cost-table .total-row {
-            background: linear-gradient(90deg, #e8f8f5, #d1f2eb);
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(14, 165, 233, 0.1));
             font-size: 1rem;
+            font-weight: 700;
         }
 
         .cost-table .total-row td {
             border-bottom: none;
-            color: #1a5f7a;
-            font-weight: 700;
+            color: var(--primary-dark);
         }
 
-        /* Stage badges */
+        /* ===== STAGE BADGES ===== */
         .stage-badge {
             display: inline-block;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 0.85rem;
+            padding: 8px 22px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Poppins', sans-serif;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .stage-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .stage-mvp {
-            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            background: linear-gradient(135deg, #059669, #10b981);
             color: #fff;
         }
 
         .stage-incremental {
-            background: linear-gradient(90deg, #2980b9, #3498db);
+            background: linear-gradient(135deg, #0369a1, #0ea5e9);
             color: #fff;
         }
 
         .stage-visual {
-            background: linear-gradient(90deg, #8e44ad, #9b59b6);
+            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
             color: #fff;
         }
 
-        /* Feature Cards */
+        /* ===== FEATURE CARDS ===== */
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
             max-width: 1000px;
             margin: 0 auto;
             width: 100%;
         }
 
         .feature-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            border: 1px solid #ecf0f1;
+            border: 1px solid var(--glass-border);
         }
 
         .feature-card::before {
@@ -289,20 +506,21 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
         .feature-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(14, 165, 233, 0.15);
         }
 
         .feature-card h3 {
-            color: #1a5f7a;
-            font-size: 1.15rem;
-            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 14px;
             text-align: center;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
         }
 
         .feature-card ul {
@@ -312,11 +530,11 @@
 
         .feature-card li {
             padding: 6px 0;
-            padding-left: 20px;
+            padding-left: 24px;
             position: relative;
-            color: #5a6c7d;
-            line-height: 1.5;
-            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+            font-size: 0.88rem;
             text-align: left;
         }
 
@@ -324,14 +542,22 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: #27ae60;
+            color: var(--secondary);
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: var(--radius-full);
+            top: 4px;
         }
 
-        /* Connection Flow */
+        /* ===== FLOW DIAGRAM ===== */
         .flow-section {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             width: 100%;
         }
@@ -340,96 +566,132 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
             flex-wrap: wrap;
-            margin: 20px 0;
+            margin: 25px 0;
         }
 
         .flow-box {
-            background: linear-gradient(135deg, #ebf5fb, #d5f5e3);
-            border: 2px solid #3498db;
-            border-radius: 12px;
-            padding: 16px 22px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(16, 185, 129, 0.1));
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 18px 26px;
             text-align: center;
-            min-width: 140px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+            min-width: 150px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+            position: relative;
         }
 
         .flow-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.25);
+            transform: scale(1.08);
+            box-shadow: var(--shadow-lg), 0 0 25px rgba(14, 165, 233, 0.3);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(16, 185, 129, 0.15));
         }
 
         .flow-box h4 {
-            color: #1a5f7a;
+            color: var(--primary-dark);
             font-size: 1rem;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
         }
 
         .flow-box p {
-            color: #5a7d8a;
+            color: var(--gray-600);
             font-size: 0.8rem;
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
         .flow-arrow {
-            font-size: 1.5rem;
-            color: #3498db;
+            font-size: 1.6rem;
+            color: var(--primary);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .flow-diagram:hover .flow-arrow {
+            opacity: 1;
+            transform: scale(1.2);
         }
 
         .details-box {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #ecf0f1;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            margin-top: 20px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .details-box:hover {
+            box-shadow: var(--shadow-xl);
         }
 
         .details-box h3 {
-            color: #1a5f7a;
-            margin-bottom: 15px;
+            color: var(--primary-dark);
+            margin-bottom: 18px;
             font-size: 1.2rem;
             text-align: center;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
         }
 
         .detail-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
         }
 
         .detail-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
-            transition: all 0.3s;
+            background: rgba(241, 245, 249, 0.8);
+            padding: 18px;
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .detail-item:hover::before {
+            left: 100%;
         }
 
         .detail-item:hover {
-            background: #ebf5fb;
-            transform: translateX(3px);
+            background: rgba(14, 165, 233, 0.05);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
         }
 
         .detail-item h4 {
-            color: #1a5f7a;
-            margin-bottom: 6px;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
             font-size: 0.95rem;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
         }
 
         .detail-item p {
-            color: #5a6c7d;
-            line-height: 1.5;
+            color: var(--gray-600);
+            line-height: 1.6;
             font-size: 0.85rem;
             text-align: left;
         }
 
-        /* Endpoint Section */
+        /* ===== ENDPOINTS ===== */
         .endpoint-wrapper {
             max-width: 1000px;
             margin: 0 auto;
@@ -437,216 +699,213 @@
         }
 
         .endpoint-stage {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .endpoint-stage h3 {
-            color: #1a5f7a;
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #3498db;
+            color: var(--dark);
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, var(--primary), var(--secondary)) 1;
             text-align: center;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
         }
 
         .endpoint-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #ecf0f1;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-xl);
+            padding: 22px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .endpoint-card:hover {
+            box-shadow: var(--shadow-xl);
         }
 
         .endpoint-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
 
         .endpoint-url {
-            background: #f8f9fa;
-            padding: 10px 16px;
-            border-radius: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
             font-family: 'Courier New', monospace;
-            color: #27ae60;
+            color: var(--secondary);
             font-size: 0.9rem;
-            border: 1px solid #27ae60;
-            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .endpoint-url:hover {
+            background: rgba(16, 185, 129, 0.15);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
         }
 
         .endpoint-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 10px;
         }
 
         .feature-pill {
-            background: #f0f7ff;
-            padding: 10px 14px;
-            border-radius: 20px;
+            background: rgba(14, 165, 233, 0.08);
+            padding: 10px 16px;
+            border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #d6eaf8;
+            border: 1px solid rgba(14, 165, 233, 0.2);
             font-size: 0.85rem;
-            color: #2c3e50;
-            transition: all 0.3s;
+            color: var(--gray-800);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
         }
 
         .feature-pill:hover {
-            background: #d6eaf8;
-            transform: scale(1.02);
+            background: rgba(14, 165, 233, 0.15);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+            border-color: rgba(14, 165, 233, 0.4);
         }
 
-        /* Image Placeholders */
-        .image-placeholder {
-            background: linear-gradient(135deg, #f0f7ff, #e8f8f5);
-            border: 2px dashed #3498db;
-            border-radius: 15px;
-            padding: 40px;
-            margin: 20px auto;
-            max-width: 900px;
-            width: 90%;
-            min-height: 450px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .image-placeholder .placeholder-text {
-            color: #5a7d8a;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        .image-placeholder .placeholder-subtext {
-            color: #95a5a6;
-            font-size: 0.95rem;
-        }
-
-        .image-placeholder .placeholder-hint {
-            color: #3498db;
-            font-size: 0.9rem;
-            margin-top: 15px;
-            padding: 10px 18px;
-            background: rgba(52, 152, 219, 0.1);
-            border-radius: 8px;
-            font-weight: 500;
-        }
-
+        /* ===== ARCHITECTURE IMAGE ===== */
         .architecture-image {
             max-width: 98%;
             max-height: 92vh;
             height: auto;
             width: auto;
-            border-radius: 8px;
+            border-radius: var(--radius-lg);
             display: block;
             margin: 0 auto;
+            box-shadow: var(--shadow-xl);
+            transition: all 0.4s ease;
         }
 
-        .image-note {
-            margin-top: 15px;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            text-align: left;
-            max-width: 900px;
-            width: 90%;
+        .architecture-image:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(1.005);
         }
 
-        .image-note h4 {
-            color: #1a5f7a;
-            margin-bottom: 10px;
-            font-size: 1.05rem;
-            font-weight: 600;
-        }
-
-        .image-note ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .image-note li {
-            color: #5a6c7d;
-            font-size: 0.9rem;
-            padding: 5px 0;
-        }
-
-        /* Closing Slide */
+        /* ===== CLOSING SLIDE ===== */
         .closing-content {
             display: inline-block;
-            padding: 50px 60px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 55px 70px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl), 0 0 50px rgba(14, 165, 233, 0.1);
             max-width: 600px;
             width: 90%;
             text-align: center;
-            border: 1px solid #ecf0f1;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .closing-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
         }
 
         .closing-title {
-            font-size: 3rem;
-            background: linear-gradient(90deg, #1a5f7a, #3498db);
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
-            font-weight: 700;
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .closing-subtitle {
-            font-size: 1.5rem;
-            color: #5a7d8a;
-            margin-bottom: 25px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.6rem;
+            color: var(--gray-600);
+            margin-bottom: 30px;
             font-weight: 300;
         }
 
         .closing-divider {
-            width: 80px;
+            width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
-            margin: 25px auto;
-            border-radius: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 30px auto;
+            border-radius: var(--radius-full);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .closing-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: shimmer 2s infinite;
         }
 
         .closing-info {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin: 30px 0;
+            gap: 50px;
+            margin: 35px 0;
             flex-wrap: wrap;
         }
 
         .closing-info-item {
             text-align: center;
+            padding: 15px 25px;
+            background: rgba(241, 245, 249, 0.5);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .closing-info-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
 
         .closing-info-item .value {
-            font-size: 2.2rem;
-            color: #27ae60;
-            font-weight: 700;
+            font-size: 2.4rem;
+            color: var(--secondary);
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
         }
 
         .closing-info-item .label {
-            color: #7f8c8d;
+            color: var(--gray-400);
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 500;
         }
 
         .closing-footer {
-            margin-top: 30px;
-            color: #95a5a6;
+            margin-top: 35px;
+            color: var(--gray-400);
             font-size: 1rem;
         }
 
@@ -654,7 +913,7 @@
             margin: 5px 0;
         }
 
-        /* Navigation */
+        /* ===== NAVIGATION ===== */
         .nav-controls {
             position: fixed;
             bottom: 25px;
@@ -665,34 +924,89 @@
         }
 
         .nav-btn {
-            background: #fff;
-            border: 2px solid #3498db;
-            color: #3498db;
-            padding: 12px 24px;
-            border-radius: 25px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 28px;
+            border-radius: var(--radius-full);
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Poppins', sans-serif;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.4s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
         }
 
         .nav-btn:hover {
-            background: #3498db;
+            background: var(--primary);
             color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg), 0 0 20px rgba(14, 165, 233, 0.3);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-1px) scale(0.98);
         }
 
         .nav-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.4;
             cursor: not-allowed;
             transform: none;
-            background: #ecf0f1;
-            border-color: #bdc3c7;
-            color: #95a5a6;
+            background: var(--gray-100);
+            border-color: var(--gray-200);
+            color: var(--gray-400);
+            box-shadow: none;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(226, 232, 240, 0.5);
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-full);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: shimmer 2s infinite;
         }
 
         .slide-indicator {
@@ -705,44 +1019,62 @@
         }
 
         .indicator-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #bdc3c7;
+            width: 10px;
+            height: 10px;
+            border-radius: var(--radius-full);
+            background: var(--gray-200);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
+            position: relative;
+        }
+
+        .indicator-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            opacity: 0;
         }
 
         .indicator-dot.active {
-            background: #3498db;
-            border-color: #2ecc71;
-            transform: scale(1.2);
+            background: var(--primary);
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
+        }
+
+        .indicator-dot.active::after {
+            width: 4px;
+            height: 4px;
+            opacity: 1;
         }
 
         .indicator-dot:hover {
-            background: #3498db;
+            background: var(--primary);
             opacity: 0.7;
+            transform: scale(1.2);
         }
 
-        .keyboard-hint {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #95a5a6;
-            font-size: 0.85rem;
-            z-index: 1000;
-        }
-
-        /* Responsive */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            :root {
+                --radius-xl: 0.75rem;
+                --radius-2xl: 1rem;
+            }
+
             .slide {
                 padding: 20px 25px;
             }
 
             .slide-header h1 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
 
             .slide-header h2 {
@@ -755,7 +1087,7 @@
 
             .cost-table th,
             .cost-table td {
-                padding: 8px 10px;
+                padding: 10px 12px;
             }
 
             .feature-grid {
@@ -775,20 +1107,29 @@
             }
 
             .closing-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .closing-subtitle {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
 
             .team-member {
-                min-width: 160px;
-                padding: 15px 20px;
+                min-width: 150px;
+                padding: 18px 20px;
             }
 
-            .image-placeholder {
-                min-height: 250px;
+            .academic-banner {
+                padding: 14px 25px;
+            }
+
+            .architecture-image {
+                max-height: 80vh;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -797,51 +1138,47 @@
     <div class="presentation-container">
         <!-- Slide 1: Portada -->
         <div class="slide active" id="slide-1">
-            <div class="slide-header">
+            <div class="slide-header animate-fadeInUp">
                 <h1>Portal Fraccional</h1>
                 <h2>De la idea al producto, paso a paso</h2>
                 <p class="subtitle">Una arquitectura que crece contigo</p>
             </div>
             
-            <div class="academic-banner">
+            <div class="academic-banner stagger-2">
                 <h3>Computación en la Nube</h3>
                 <p>Profesor: Héctor Cifuentes</p>
             </div>
 
-            <div style="text-align: center; margin: 25px 0;">
-                <p style="color: #5a7d8a; font-size: 1rem; margin-bottom: 15px; font-weight: 500;">Equipo de Trabajo</p>
+            <div style="text-align: center; margin: 25px 0;" class="animate-fadeInUp stagger-3">
+                <p style="color: var(--gray-600); font-size: 1rem; margin-bottom: 15px; font-weight: 500;">Equipo de Trabajo</p>
                 <div class="team-grid">
-                    <div class="team-member">
+                    <div class="team-member animate-fadeInUp stagger-4">
                         <div class="avatar">BF</div>
                         <div class="name">Benjamín Fernández</div>
                         <div class="role">Desarrollador</div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member animate-fadeInUp stagger-5">
                         <div class="avatar">MD</div>
                         <div class="name">Matías Díaz</div>
                         <div class="role">Desarrollador</div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member animate-fadeInUp stagger-6">
                         <div class="avatar">BP</div>
                         <div class="name">Bastián Pizarro</div>
                         <div class="role">Desarrollador</div>
                     </div>
                 </div>
             </div>
-
-            <div style="text-align: center; margin-top: 10px; color: #95a5a6;">
-                <p style="font-size: 0.85rem;">Presiona → o usa las flechas del teclado para navegar</p>
-            </div>
         </div>
 
         <!-- Slide 2: Costos MVP -->
         <div class="slide" id="slide-2">
-            <div class="slide-header">
+            <div class="slide-header animate-fadeInUp">
                 <h1>Inversión Inicial</h1>
                 <h2>Para comenzar, solo necesitas...</h2>
-                <span class="stage-badge stage-mvp">Etapa Inicial</span>
+                <span class="stage-badge stage-mvp animate-fadeInScale stagger-2">Etapa Inicial</span>
             </div>
-            <table class="cost-table">
+            <table class="cost-table animate-fadeInUp stagger-3">
                 <thead>
                     <tr>
                         <th>¿Qué necesitas?</th>
@@ -905,19 +1242,19 @@
                     </tr>
                 </tbody>
             </table>
-            <p style="text-align: center; margin-top: 15px; color: #95a5a6; font-size: 0.8rem;">
+            <p style="text-align: center; margin-top: 15px; color: var(--gray-400); font-size: 0.8rem;" class="animate-fadeInUp stagger-5">
                 * Puede variar según el uso real del servicio
             </p>
         </div>
 
         <!-- Slide 3: Costos Incremental -->
         <div class="slide" id="slide-3">
-            <div class="slide-header">
+            <div class="slide-header animate-fadeInUp">
                 <h1>Cuando el proyecto crece</h1>
                 <h2>Preparados para más usuarios y más velocidad</h2>
-                <span class="stage-badge stage-incremental">Etapa Avanzada</span>
+                <span class="stage-badge stage-incremental animate-fadeInScale stagger-2">Etapa Avanzada</span>
             </div>
-            <table class="cost-table">
+            <table class="cost-table animate-fadeInUp stagger-3">
                 <thead>
                     <tr>
                         <th>¿Qué mejoramos?</th>
@@ -985,12 +1322,12 @@
 
         <!-- Slide 4: Redes y Seguridad -->
         <div class="slide" id="slide-4">
-            <div class="slide-header">
+            <div class="slide-header animate-fadeInUp">
                 <h1>Conexiones Seguras</h1>
                 <h2>Cómo protegemos la información</h2>
             </div>
             <div class="feature-grid">
-                <div class="feature-card">
+                <div class="feature-card animate-fadeInUp stagger-1">
                     <h3>Comunicación Privada</h3>
                     <ul>
                         <li>Todo viaja cifrado (como un sobre sellado)</li>
@@ -999,7 +1336,7 @@
                         <li>Acceso controlado por dirección IP</li>
                     </ul>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-fadeInUp stagger-2">
                     <h3>Redes Internas</h3>
                     <ul>
                         <li>Túnel privado entre componentes</li>
@@ -1008,7 +1345,7 @@
                         <li>Aislamiento de la base de datos</li>
                     </ul>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-fadeInUp stagger-3">
                     <h3>Protección Activa</h3>
                     <ul>
                         <li>Filtro contra visitantes maliciosos</li>
@@ -1017,7 +1354,7 @@
                         <li>Escudo ante saturaciones</li>
                     </ul>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card animate-fadeInUp stagger-4">
                     <h3>Velocidad Global</h3>
                     <ul>
                         <li>Copias de tu sitio en varios países</li>
@@ -1031,34 +1368,34 @@
 
         <!-- Slide 5: Base de Datos -->
         <div class="slide" id="slide-5">
-            <div class="slide-header">
+            <div class="slide-header animate-fadeInUp">
                 <h1>Donde guardamos todo</h1>
                 <h2>La información siempre disponible y segura</h2>
             </div>
             <div class="flow-section">
                 <div class="flow-diagram">
-                    <div class="flow-box">
+                    <div class="flow-box animate-fadeInScale stagger-1">
                         <h4>Usuario</h4>
                         <p>Desde su celular o PC</p>
                     </div>
                     <div class="flow-arrow">→</div>
-                    <div class="flow-box">
+                    <div class="flow-box animate-fadeInScale stagger-2">
                         <h4>Sitio Web</h4>
                         <p>La página que ven</p>
                     </div>
                     <div class="flow-arrow">→</div>
-                    <div class="flow-box">
+                    <div class="flow-box animate-fadeInScale stagger-3">
                         <h4>Procesos</h4>
                         <p>El cerebro del sistema</p>
                     </div>
                     <div class="flow-arrow">→</div>
-                    <div class="flow-box">
+                    <div class="flow-box animate-fadeInScale stagger-4">
                         <h4>Almacén</h4>
                         <p>Donde guardamos todo</p>
                     </div>
                 </div>
 
-                <div class="details-box" style="margin-top: 20px;">
+                <div class="details-box animate-fadeInUp stagger-5" style="margin-top: 20px;">
                     <h3>Características principales</h3>
                     <div class="detail-grid">
                         <div class="detail-item">
@@ -1084,16 +1421,16 @@
 
         <!-- Slide 6: Endpoints -->
         <div class="slide" id="slide-6">
-            <div class="slide-header">
+            <div class="slide-header animate-fadeInUp">
                 <h1>Cómo llegan los usuarios</h1>
                 <h2>La dirección de tu sitio web</h2>
             </div>
             <div class="endpoint-wrapper">
-                <div class="endpoint-stage">
+                <div class="endpoint-stage animate-fadeInUp stagger-1">
                     <h3>Etapa Inicial</h3>
                     <div class="endpoint-card">
                         <div class="endpoint-header">
-                            <div class="endpoint-url">portal50.vercel.app</div>
+                            <div class="endpoint-url">portal50.onrender.com</div>
                             <span class="stage-badge stage-mvp">Gratis</span>
                         </div>
                         <div class="endpoint-features">
@@ -1107,13 +1444,13 @@
                     </div>
                 </div>
 
-                <div class="endpoint-stage">
+                <div class="endpoint-stage animate-fadeInUp stagger-3">
                     <h3>Etapa Avanzada</h3>
                     <div class="endpoint-card">
                         <div class="endpoint-header">
                             <div>
                                 <div class="endpoint-url" style="margin-bottom: 8px;">portal50.cl</div>
-                                <div class="endpoint-url" style="font-size: 0.85rem; border-color: #3498db; color: #3498db;">api.portal50.cl</div>
+                                <div class="endpoint-url" style="font-size: 0.85rem; border-color: var(--primary); color: var(--primary);">api.portal50.cl</div>
                             </div>
                             <span class="stage-badge stage-incremental">Profesional</span>
                         </div>
@@ -1130,79 +1467,122 @@
             </div>
         </div>
 
-        <!-- Slide 7: Arquitectura Completa (fusionada) -->
+        <!-- Slide 7: Arquitectura Completa -->
         <div class="slide" id="slide-7" style="justify-content: flex-start; padding-top: 15px;">
-            <div class="slide-header" style="margin-bottom: 5px;">
+            <div class="slide-header animate-fadeInUp" style="margin-bottom: 5px;">
                 <h1 style="font-size: 1.8rem; margin-bottom: 2px;">Arquitectura del Sistema</h1>
                 <h2 style="font-size: 1rem; margin-bottom: 2px;">Etapa Inicial y Etapa Avanzada</h2>
                 <span class="stage-badge stage-visual" style="margin-bottom: 2px; margin-top: 2px; padding: 4px 12px; font-size: 0.75rem;">Arquitectura Completa</span>
             </div>
-            <img src="portal50_arquitectura_v2.png" alt="Arquitectura del Sistema - Etapa Inicial y Avanzada" class="architecture-image">
+            <img src="portal50_arquitectura_v2.png" alt="Arquitectura del Sistema - Etapa Inicial y Avanzada" class="architecture-image animate-fadeInScale stagger-3">
         </div>
-        
-        <div class="slide" id="slide-8">
-            <div class="slide-header">
-                <h1>¿Por qué estos servicios?</h1>
-                <h2>Justificación técnica de cada decisión</h2>
+
+        <!-- Slide 8: Por qué estos servicios -->
+        <div class="slide" id="slide-8" style="padding-bottom: 90px;">
+            <div class="slide-header animate-fadeInUp" style="margin-bottom: 10px;">
+                <h1 style="font-size: 1.6rem; margin-bottom: 2px;">¿Por qué estos servicios?</h1>
+                <h2 style="font-size: 0.85rem; margin-bottom: 2px;">Justificación técnica de cada decisión</h2>
             </div>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Vercel → Vercel Pro</h3>
+            <div class="feature-grid" style="gap: 10px; max-width: 1050px;">
+                <div class="feature-card animate-fadeInUp stagger-1" style="padding: 14px 16px;">
+                    <h3 style="font-size: 0.95rem; margin-bottom: 6px;">Vercel → Vercel Pro</h3>
                     <ul>
-                        <li>Deploy automático desde GitHub sin configuración</li>
-                        <li>Edge Network global (CDN incluido en free tier)</li>
-                        <li>Mejor opción para Next.js vs Netlify</li>
-                        <li>Migración a Pro solo requiere cambio de plan</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Deploy automático desde GitHub sin configuración</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Edge Network global (CDN incluido en free tier)</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Mejor opción para Next.js vs Netlify</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Migración a Pro solo requiere cambio de plan</li>
                     </ul>
                 </div>
-                <div class="feature-card">
-                    <h3>Render → Railway</h3>
+                <div class="feature-card animate-fadeInUp stagger-2" style="padding: 14px 16px;">
+                    <h3 style="font-size: 0.95rem; margin-bottom: 6px;">Render → Railway</h3>
                     <ul>
-                        <li>Render gratis: cold start tras 15 min inactividad</li>
-                        <li>Railway: siempre activo, múltiples instancias</li>
-                        <li>Ambos soportan Node.js + conexión privada a MongoDB</li>
-                        <li>Migración sin cambiar código, solo variable de entorno</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Render gratis: cold start tras 15 min inactividad</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Railway: siempre activo, múltiples instancias</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Ambos soportan Node.js + conexión privada a MongoDB</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Migración sin cambiar código, solo variable de entorno</li>
                     </ul>
                 </div>
-                <div class="feature-card">
-                    <h3>MongoDB Atlas M0 → M10</h3>
+                <div class="feature-card animate-fadeInUp stagger-3" style="padding: 14px 16px;">
+                    <h3 style="font-size: 0.95rem; margin-bottom: 6px;">MongoDB Atlas M0 → M10</h3>
                     <ul>
-                        <li>M0: 512 MB gratis, ideal para MVP y primeros usuarios</li>
-                        <li>M10: 2 GB, 3 réplicas automáticas, backups diarios</li>
-                        <li>Elegido sobre PostgreSQL: esquema flexible (documentos)</li>
-                        <li>Driver oficial para Node.js con reconexión automática</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">M0: 512 MB gratis, ideal para MVP y primeros usuarios</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">M10: 2 GB, 3 réplicas automáticas, backups diarios</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Elegido sobre PostgreSQL: esquema flexible (documentos)</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Driver oficial para Node.js con reconexión automática</li>
                     </ul>
                 </div>
-                <div class="feature-card">
-                    <h3>Cloudflare (gratuito)</h3>
+                <div class="feature-card animate-fadeInUp stagger-4" style="padding: 14px 16px;">
+                    <h3 style="font-size: 0.95rem; margin-bottom: 6px;">Cloudflare (gratuito)</h3>
                     <ul>
-                        <li>CDN + WAF + DDoS protection en un solo servicio</li>
-                        <li>Gestión de DNS + SSL automático sin costo adicional</li>
-                        <li>Alternativa AWS CloudFront costaría ~$10/mes extra</li>
-                        <li>Rate limiting gratuito para proteger la API</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">CDN + WAF + DDoS protection en un solo servicio</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Gestión de DNS + SSL automático sin costo adicional</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Alternativa AWS CloudFront costaría ~$10/mes extra</li>
+                        <li style="font-size: 0.78rem; padding: 3px 0 3px 18px; line-height: 1.35;">Rate limiting gratuito para proteger la API</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 9: Cierre -->
-        <div class="slide" id="slide-9">
-            <div class="closing-content">
-                <div class="closing-title">Muchas gracias por su atención</div>
+        <!-- Slide 9: Huella de Carbono -->
+        <div class="slide" id="slide-9" style="padding-bottom: 90px;">
+            <div class="slide-header animate-fadeInUp" style="margin-bottom: 10px;">
+                <h1 style="font-size: 1.6rem; margin-bottom: 2px;">Huella de Carbono</h1>
+                <h2 style="font-size: 0.85rem; margin-bottom: 2px;">Impacto ambiental y medidas de mitigación</h2>
+            </div>
+            <div class="feature-grid" style="gap: 14px; max-width: 900px; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+                <div class="feature-card animate-fadeInUp stagger-1" style="padding: 18px 22px;">
+                    <h3 style="font-size: 0.95rem; margin-bottom: 8px;">Componentes de mayor impacto</h3>
+                    <ul>
+                        <li style="font-size: 0.82rem; padding: 4px 0 4px 18px; line-height: 1.4;">Railway (backend 24/7): ~0.5 kg CO2/mes estimado</li>
+                        <li style="font-size: 0.82rem; padding: 4px 0 4px 18px; line-height: 1.4;">MongoDB M10 (3 nodos activos): ~1.2 kg CO2/mes</li>
+                        <li style="font-size: 0.82rem; padding: 4px 0 4px 18px; line-height: 1.4;">AWS S3 + CloudFront: impacto bajo (serverless)</li>
+                        <li style="font-size: 0.82rem; padding: 4px 0 4px 18px; line-height: 1.4;">Vercel Edge Functions: muy bajo consumo energético</li>
+                    </ul>
+                </div>
+                <div class="feature-card animate-fadeInUp stagger-2" style="padding: 18px 22px;">
+                    <h3 style="font-size: 0.95rem; margin-bottom: 8px;">Medidas de Mitigación</h3>
+                    <ul>
+                        <li style="font-size: 0.82rem; padding: 4px 0 4px 18px; line-height: 1.4;">Usar región AWS us-west-2 (Oregon, 100% renovable)</li>
+                        <li style="font-size: 0.82rem; padding: 4px 0 4px 18px; line-height: 1.4;">Railway serverless: escala a 0 si no hay tráfico</li>
+                        <li style="font-size: 0.82rem; padding: 4px 0 4px 18px; line-height: 1.4;">Cloudflare CDN reduce transferencia desde el servidor</li>
+                        <li style="font-size: 0.82rem; padding: 4px 0 4px 18px; line-height: 1.4;">MongoDB Atlas en región Iowa (energía renovable)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Cierre -->
+        <div class="slide" id="slide-10">
+            <div class="closing-content animate-fadeInScale">
+                <div class="closing-title">Muchas gracias</div>
+                <div class="closing-subtitle">por su atención</div>
                 <div class="closing-divider"></div>
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <p style="color: #5a7d8a; font-size: 1.1rem; margin-bottom: 5px;">Portal Fraccional</p>
-                    <p style="color: #95a5a6; font-size: 0.9rem;">Una arquitectura pensada para crecer</p>
+                    <p style="color: var(--gray-600); font-size: 1.1rem; margin-bottom: 5px;">Portal Fraccional</p>
+                    <p style="color: var(--gray-400); font-size: 0.9rem;">Una arquitectura pensada para crecer</p>
                 </div>
                 <div class="closing-info">
+                    <div class="closing-info-item animate-fadeInUp stagger-2">
+                        <div class="value">~$5</div>
+                        <div class="label">Para empezar</div>
+                    </div>
+                    <div class="closing-info-item animate-fadeInUp stagger-4">
+                        <div class="value">~$100</div>
+                        <div class="label">Para crecer</div>
+                    </div>
                 </div>
                 <div class="closing-divider"></div>
                 <div class="closing-footer">
                     <p style="margin-bottom: 8px; font-size: 1.1rem;">¿Preguntas?</p>
-                    <p style="font-size: 0.85rem; color: #95a5a6;">Computación en la Nube — Profesor Héctor Cifuentes</p>
+                    <p style="font-size: 0.85rem; color: var(--gray-400);">Computación en la Nube — Profesor Héctor Cifuentes</p>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar" style="width: 12.5%;"></div>
     </div>
 
     <!-- Navigation Controls -->
@@ -1216,7 +1596,7 @@
 
     <script>
         let currentSlide = 1;
-        const totalSlides = 9;
+        const totalSlides = 10;
 
         function init() {
             // Create indicator dots
@@ -1228,6 +1608,13 @@
                 indicatorContainer.appendChild(dot);
             }
             updateNavigation();
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const percentage = (currentSlide / totalSlides) * 100;
+            progressBar.style.width = percentage + '%';
         }
 
         function goToSlide(n) {
@@ -1257,6 +1644,7 @@
             });
             
             updateNavigation();
+            updateProgressBar();
         }
 
         function changeSlide(direction) {
@@ -1274,8 +1662,10 @@
                 if (currentSlide < totalSlides) changeSlide(1);
             } else if (e.key === 'ArrowLeft') {
                 if (currentSlide > 1) changeSlide(-1);
-            } else if (e.key >= '1' && e.key <= '8') {
+            } else if (e.key >= '1' && e.key <= '9') {
                 goToSlide(parseInt(e.key));
+            } else if (e.key === '0') {
+                goToSlide(10);
             }
         });
 

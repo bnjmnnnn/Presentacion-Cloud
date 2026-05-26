@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Fraccional — Presentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            padding: 30px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(60px);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-60px);
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-header h1 {
+            font-size: 2.4rem;
+            color: #1a5f7a;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .slide-header h2 {
+            font-size: 1.3rem;
+            color: #5a7d8a;
+            font-weight: 400;
+        }
+
+        .slide-header .subtitle {
+            font-size: 1rem;
+            color: #3498db;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        /* Info cards for team/academic info */
+        .info-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin: 10px;
+            text-align: center;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+        }
+
+        .info-card h3 {
+            color: #1a5f7a;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            color: #5a7d8a;
+            font-size: 0.9rem;
+        }
+
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .team-member {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            min-width: 200px;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .team-member .avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .team-member .name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .team-member .role {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        /* Academic info banner */
+        .academic-banner {
+            background: linear-gradient(90deg, #1a5f7a, #3498db);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 10px;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 700px;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .academic-banner h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .academic-banner p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Cost Tables */
+        .cost-table {
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .cost-table thead {
+            background: linear-gradient(90deg, #1a5f7a, #3498db);
+        }
+
+        .cost-table th {
+            padding: 14px 16px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .cost-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .cost-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .cost-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: #1a5f7a;
+        }
+
+        .cost-table td:last-child {
+            text-align: center;
+            font-weight: 700;
+            color: #27ae60;
+        }
+
+        .cost-table .total-row {
+            background: linear-gradient(90deg, #e8f8f5, #d1f2eb);
+            font-size: 1rem;
+        }
+
+        .cost-table .total-row td {
+            border-bottom: none;
+            color: #1a5f7a;
+            font-weight: 700;
+        }
+
+        /* Stage badges */
+        .stage-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stage-mvp {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            color: #fff;
+        }
+
+        .stage-incremental {
+            background: linear-gradient(90deg, #2980b9, #3498db);
+            color: #fff;
+        }
+
+        .stage-visual {
+            background: linear-gradient(90deg, #8e44ad, #9b59b6);
+            color: #fff;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #ecf0f1;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card h3 {
+            color: #1a5f7a;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #5a6c7d;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .feature-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Connection Flow */
+        .flow-section {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .flow-box {
+            background: linear-gradient(135deg, #ebf5fb, #d5f5e3);
+            border: 2px solid #3498db;
+            border-radius: 12px;
+            padding: 16px 22px;
+            text-align: center;
+            min-width: 140px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+        }
+
+        .flow-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.25);
+        }
+
+        .flow-box h4 {
+            color: #1a5f7a;
+            font-size: 1rem;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .flow-box p {
+            color: #5a7d8a;
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #3498db;
+        }
+
+        .details-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #ecf0f1;
+        }
+
+        .details-box h3 {
+            color: #1a5f7a;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .detail-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s;
+        }
+
+        .detail-item:hover {
+            background: #ebf5fb;
+            transform: translateX(3px);
+        }
+
+        .detail-item h4 {
+            color: #1a5f7a;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .detail-item p {
+            color: #5a6c7d;
+            line-height: 1.5;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        /* Endpoint Section */
+        .endpoint-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .endpoint-stage {
+            margin-bottom: 20px;
+        }
+
+        .endpoint-stage h3 {
+            color: #1a5f7a;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #3498db;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .endpoint-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #ecf0f1;
+        }
+
+        .endpoint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .endpoint-url {
+            background: #f8f9fa;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            color: #27ae60;
+            font-size: 0.9rem;
+            border: 1px solid #27ae60;
+            font-weight: 600;
+        }
+
+        .endpoint-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .feature-pill {
+            background: #f0f7ff;
+            padding: 10px 14px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d6eaf8;
+            font-size: 0.85rem;
+            color: #2c3e50;
+            transition: all 0.3s;
+        }
+
+        .feature-pill:hover {
+            background: #d6eaf8;
+            transform: scale(1.02);
+        }
+
+        /* Image Placeholders */
+        .image-placeholder {
+            background: linear-gradient(135deg, #f0f7ff, #e8f8f5);
+            border: 2px dashed #3498db;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 900px;
+            width: 90%;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .image-placeholder .placeholder-text {
+            color: #5a7d8a;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .image-placeholder .placeholder-subtext {
+            color: #95a5a6;
+            font-size: 0.95rem;
+        }
+
+        .image-placeholder .placeholder-hint {
+            color: #3498db;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            padding: 10px 18px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .architecture-image {
+            max-width: 90%;
+            max-height: 420px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-note {
+            margin-top: 15px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            max-width: 900px;
+            width: 90%;
+        }
+
+        .image-note h4 {
+            color: #1a5f7a;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .image-note ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .image-note li {
+            color: #5a6c7d;
+            font-size: 0.9rem;
+            padding: 5px 0;
+        }
+
+        /* Closing Slide */
+        .closing-content {
+            display: inline-block;
+            padding: 50px 60px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #ecf0f1;
+        }
+
+        .closing-title {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #1a5f7a, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .closing-subtitle {
+            font-size: 1.5rem;
+            color: #5a7d8a;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .closing-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            margin: 25px auto;
+            border-radius: 4px;
+        }
+
+        .closing-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .closing-info-item {
+            text-align: center;
+        }
+
+        .closing-info-item .value {
+            font-size: 2.2rem;
+            color: #27ae60;
+            font-weight: 700;
+        }
+
+        .closing-info-item .label {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .closing-footer {
+            margin-top: 30px;
+            color: #95a5a6;
+            font-size: 1rem;
+        }
+
+        .closing-footer p {
+            margin: 5px 0;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: #fff;
+            border: 2px solid #3498db;
+            color: #3498db;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: #3498db;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+            background: #ecf0f1;
+            border-color: #bdc3c7;
+            color: #95a5a6;
+        }
+
+        .slide-indicator {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #bdc3c7;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .indicator-dot.active {
+            background: #3498db;
+            border-color: #2ecc71;
+            transform: scale(1.2);
+        }
+
+        .indicator-dot:hover {
+            background: #3498db;
+            opacity: 0.7;
+        }
+
+        .keyboard-hint {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #95a5a6;
+            font-size: 0.85rem;
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px 25px;
+            }
+
+            .slide-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .slide-header h2 {
+                font-size: 1rem;
+            }
+
+            .cost-table {
+                font-size: 0.8rem;
+            }
+
+            .cost-table th,
+            .cost-table td {
+                padding: 8px 10px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .endpoint-features {
+                grid-template-columns: 1fr;
+            }
+
+            .closing-title {
+                font-size: 2rem;
+            }
+
+            .closing-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .team-member {
+                min-width: 160px;
+                padding: 15px 20px;
+            }
+
+            .image-placeholder {
+                min-height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Portada -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-header">
+                <h1>Portal Fraccional</h1>
+                <h2>De la idea al producto, paso a paso</h2>
+                <p class="subtitle">Una arquitectura que crece contigo</p>
+            </div>
+            
+            <div class="academic-banner">
+                <h3>Computación en la Nube</h3>
+                <p>Profesor: Héctor Cifuentes</p>
+            </div>
+
+            <div style="text-align: center; margin: 25px 0;">
+                <p style="color: #5a7d8a; font-size: 1rem; margin-bottom: 15px; font-weight: 500;">Equipo de Trabajo</p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="avatar">BF</div>
+                        <div class="name">Benjamín Fernández</div>
+                        <div class="role">Desarrollador</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="avatar">MD</div>
+                        <div class="name">Matías Díaz</div>
+                        <div class="role">Desarrollador</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="avatar">BP</div>
+                        <div class="name">Bastián Pizarro</div>
+                        <div class="role">Desarrollador</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 10px; color: #95a5a6;">
+                <p style="font-size: 0.85rem;">Presiona → o usa las flechas del teclado para navegar</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Costos MVP -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <h1>Inversión Inicial</h1>
+                <h2>Para comenzar, solo necesitas...</h2>
+                <span class="stage-badge stage-mvp">Etapa Inicial</span>
+            </div>
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>¿Qué necesitas?</th>
+                        <th>Servicio</th>
+                        <th>Qué incluye</th>
+                        <th>Costo mensual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Página web</td>
+                        <td>Vercel</td>
+                        <td>Sitio rápido, accesible desde cualquier lugar</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Servidor</td>
+                        <td>Render</td>
+                        <td>Procesamiento de datos y lógica del negocio</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Base de datos</td>
+                        <td>MongoDB Atlas</td>
+                        <td>Almacenamiento seguro de información</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Registro de usuarios</td>
+                        <td>Firebase</td>
+                        <td>Inicio de sesión seguro y confiable</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Almacenar archivos</td>
+                        <td>Firebase Storage</td>
+                        <td>Fotos, CVs y documentos (5 GB)</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Correos</td>
+                        <td>Resend</td>
+                        <td>Notificaciones y mensajes automáticos</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección web</td>
+                        <td>Render</td>
+                        <td>Conexión segura (HTTPS)</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Actualizaciones</td>
+                        <td>GitHub</td>
+                        <td>Despliegue automático de cambios</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="3" style="text-align: center;">Inversión total estimada</td>
+                        <td>Aprox. $5 USD/mes*</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="text-align: center; margin-top: 15px; color: #95a5a6; font-size: 0.8rem;">
+                * Puede variar según el uso real del servicio
+            </p>
+        </div>
+
+        <!-- Slide 3: Costos Incremental -->
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <h1>Cuando el proyecto crece</h1>
+                <h2>Preparados para más usuarios y más velocidad</h2>
+                <span class="stage-badge stage-incremental">Etapa Avanzada</span>
+            </div>
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>¿Qué mejoramos?</th>
+                        <th>Servicio</th>
+                        <th>Beneficio</th>
+                        <th>Costo mensual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Página web profesional</td>
+                        <td>Vercel Pro</td>
+                        <td>Tu propio dominio y estadísticas</td>
+                        <td>$20</td>
+                    </tr>
+                    <tr>
+                        <td>Servidor potente</td>
+                        <td>Railway</td>
+                        <td>Varios servidores trabajando juntos</td>
+                        <td>$20</td>
+                    </tr>
+                    <tr>
+                        <td>Base de datos robusta</td>
+                        <td>MongoDB M10</td>
+                        <td>2 GB con respaldos automáticos</td>
+                        <td>$57</td>
+                    </tr>
+                    <tr>
+                        <td>Velocidad extra</td>
+                        <td>Upstash Redis</td>
+                        <td>Información rápida al alcance</td>
+                        <td>$0-10</td>
+                    </tr>
+                    <tr>
+                        <td>Archivos ilimitados</td>
+                        <td>AWS S3 + CloudFront</td>
+                        <td>Almacenamiento que crece contigo</td>
+                        <td>~$5</td>
+                    </tr>
+                    <tr>
+                        <td>Protección avanzada</td>
+                        <td>Cloudflare</td>
+                        <td>Escudo contra ataques y sobrecargas</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Contenido rápido</td>
+                        <td>Cloudflare CDN</td>
+                        <td>Tu sitio cargando desde cualquier país</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr>
+                        <td>Monitoreo</td>
+                        <td>Sentry + Winston</td>
+                        <td>Saber inmediatamente si algo falla</td>
+                        <td>Gratis</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="3" style="text-align: center;">Inversión total estimada</td>
+                        <td>Aprox. $100 USD/mes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 4: Redes y Seguridad -->
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
+                <h1>Conexiones Seguras</h1>
+                <h2>Cómo protegemos la información</h2>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Comunicación Privada</h3>
+                    <ul>
+                        <li>Todo viaja cifrado (como un sobre sellado)</li>
+                        <li>Certificados de seguridad automáticos</li>
+                        <li>Conexión directa entre servicios</li>
+                        <li>Acceso controlado por dirección IP</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Redes Internas</h3>
+                    <ul>
+                        <li>Túnel privado entre componentes</li>
+                        <li>Datos no salen a internet público</li>
+                        <li>Menor tiempo de respuesta</li>
+                        <li>Aislamiento de la base de datos</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Protección Activa</h3>
+                    <ul>
+                        <li>Filtro contra visitantes maliciosos</li>
+                        <li>Detección automática de robots</li>
+                        <li>Límites de peticiones por minuto</li>
+                        <li>Escudo ante saturaciones</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Velocidad Global</h3>
+                    <ul>
+                        <li>Copias de tu sitio en varios países</li>
+                        <li>Fotos y videos cargando más rápido</li>
+                        <li>Menos espera para los usuarios</li>
+                        <li>Experiencia fluida desde cualquier lugar</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Base de Datos -->
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <h1>Donde guardamos todo</h1>
+                <h2>La información siempre disponible y segura</h2>
+            </div>
+            <div class="flow-section">
+                <div class="flow-diagram">
+                    <div class="flow-box">
+                        <h4>Usuario</h4>
+                        <p>Desde su celular o PC</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">
+                        <h4>Sitio Web</h4>
+                        <p>La página que ven</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">
+                        <h4>Procesos</h4>
+                        <p>El cerebro del sistema</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">
+                        <h4>Almacén</h4>
+                        <p>Donde guardamos todo</p>
+                    </div>
+                </div>
+
+                <div class="details-box" style="margin-top: 20px;">
+                    <h3>Características principales</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <h4>Comienza gratis</h4>
+                            <p>512 MB para empezar. Ideal para probar la idea y los primeros usuarios.</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Crece sin problemas</h4>
+                            <p>2 GB con respaldo automático. Tres copias de tu información por seguridad.</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Todo más rápido</h4>
+                            <p>Memoria temporal para lo más consultado. Menos de 1 milisegundo de espera.</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Siempre conectado</h4>
+                            <p>Si algo falla, se reconecta solo. Múltiples caminos para llegar a los datos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Endpoints -->
+        <div class="slide" id="slide-6">
+            <div class="slide-header">
+                <h1>Cómo llegan los usuarios</h1>
+                <h2>La dirección de tu sitio web</h2>
+            </div>
+            <div class="endpoint-wrapper">
+                <div class="endpoint-stage">
+                    <h3>Etapa Inicial</h3>
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <div class="endpoint-url">portal50.vercel.app</div>
+                            <span class="stage-badge stage-mvp">Gratis</span>
+                        </div>
+                        <div class="endpoint-features">
+                            <div class="feature-pill">Conexión segura incluida</div>
+                            <div class="feature-pill">Dirección proporcionada</div>
+                            <div class="feature-pill">Página y procesos unidos</div>
+                            <div class="feature-pill">Cambios automáticos</div>
+                            <div class="feature-pill">Descansa si no hay visitas</div>
+                            <div class="feature-pill">Configuración protegida</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint-stage">
+                    <h3>Etapa Avanzada</h3>
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <div>
+                                <div class="endpoint-url" style="margin-bottom: 8px;">portal50.cl</div>
+                                <div class="endpoint-url" style="font-size: 0.85rem; border-color: #3498db; color: #3498db;">api.portal50.cl</div>
+                            </div>
+                            <span class="stage-badge stage-incremental">Profesional</span>
+                        </div>
+                        <div class="endpoint-features">
+                            <div class="feature-pill">Tu propia dirección</div>
+                            <div class="feature-pill">Escudo de protección</div>
+                            <div class="feature-pill">Filtro de robots</div>
+                            <div class="feature-pill">Contenido en el mundo</div>
+                            <div class="feature-pill">Seguridad de punta a punta</div>
+                            <div class="feature-pill">Estadísticas de visitas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Arquitectura Completa (fusionada) -->
+        <div class="slide" id="slide-7">
+            <div class="slide-header">
+                <h1>Arquitectura del Sistema</h1>
+                <h2>Etapa Inicial y Etapa Avanzada</h2>
+                <span class="stage-badge stage-visual">Arquitectura Completa</span>
+            </div>
+            <div class="image-placeholder">
+                <div class="placeholder-text">Espacio para tu diagrama</div>
+                <div class="placeholder-subtext">Coloca aquí la imagen de la arquitectura completa</div>
+                <div class="placeholder-hint">Archivo sugerido: portal50_arquitectura_v2.png</div>
+            </div>
+            <div class="image-note">
+                <h4>Evolución de la arquitectura:</h4>
+                <ul>
+                    <li>Página web rápida que escala a profesional</li>
+                    <li>Servidor gratuito que evoluciona a múltiples instancias</li>
+                    <li>Base de datos que crece con el proyecto</li>
+                    <li>Protección desde el primer día hasta nivel avanzado</li>
+                    <li>Almacenamiento de archivos sin límites de crecimiento</li>
+                    <li>Monitoreo constante para saber si algo falla</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: Cierre -->
+        <div class="slide" id="slide-8">
+            <div class="closing-content">
+                <div class="closing-title">Muchas gracias por su atención</div>
+                <div class="closing-divider"></div>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <p style="color: #5a7d8a; font-size: 1.1rem; margin-bottom: 5px;">Portal Fraccional</p>
+                    <p style="color: #95a5a6; font-size: 0.9rem;">Una arquitectura pensada para crecer</p>
+                </div>
+                <div class="closing-info">
+                </div>
+                <div class="closing-divider"></div>
+                <div class="closing-footer">
+                    <p style="margin-bottom: 8px; font-size: 1.1rem;">¿Preguntas?</p>
+                    <p style="font-size: 0.85rem; color: #95a5a6;">Computación en la Nube — Profesor Héctor Cifuentes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="slide-indicator" id="slide-indicator"></div>
+    
+    
+    <div class="nav-controls">
+        <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">Anterior</button>
+        <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Siguiente</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+
+        function init() {
+            // Create indicator dots
+            const indicatorContainer = document.getElementById('slide-indicator');
+            for (let i = 1; i <= totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'indicator-dot' + (i === 1 ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                indicatorContainer.appendChild(dot);
+            }
+            updateNavigation();
+        }
+
+        function goToSlide(n) {
+            if (n < 1 || n > totalSlides) return;
+            
+            const current = document.getElementById(`slide-${currentSlide}`);
+            const next = document.getElementById(`slide-${n}`);
+            
+            // Remove all classes
+            document.querySelectorAll('.slide').forEach(s => {
+                s.classList.remove('active', 'prev');
+            });
+            
+            // Set direction
+            if (n > currentSlide) {
+                current.classList.add('prev');
+            } else {
+                next.classList.add('prev');
+            }
+            
+            currentSlide = n;
+            next.classList.add('active');
+            
+            // Update indicators
+            document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index + 1 === currentSlide);
+            });
+            
+            updateNavigation();
+        }
+
+        function changeSlide(direction) {
+            goToSlide(currentSlide + direction);
+        }
+
+        function updateNavigation() {
+            document.getElementById('prev-btn').disabled = currentSlide === 1;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                if (currentSlide < totalSlides) changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide > 1) changeSlide(-1);
+            } else if (e.key >= '1' && e.key <= '8') {
+                goToSlide(parseInt(e.key));
+            }
+        });
+
+        // Initialize
+        init();
+    </script>
+</body>
+</html>
